@@ -111,3 +111,9 @@ fun RickyAndMortyPrev() {
         )
     )
 }
+
+@Composable
+@Preview(showSystemUi = true)
+fun RickyAndMortyLoadingPreview() {
+    RickyAndMortyLoadingContent()
+}

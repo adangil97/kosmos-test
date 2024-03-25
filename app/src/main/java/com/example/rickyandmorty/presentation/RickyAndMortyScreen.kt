@@ -7,9 +7,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -34,7 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickyandmorty.ExpandableColumn
-import com.example.rickyandmorty.LoadingContent
+import com.example.rickyandmorty.ShimmerComponent
 import com.example.rickyandmorty.SimpleErrorContent
 
 @Composable
@@ -43,7 +44,10 @@ fun RickyAndMortyScreen(
 ) {
     val screenState by viewModel.state.collectAsState()
     when (val result = screenState) {
-        RickyAndMortyState.Loading -> LoadingContent()
+        RickyAndMortyState.Loading -> RickyAndMortyLoadingContent(
+            modifier = Modifier.padding(12.dp)
+        )
+
         is RickyAndMortyState.Success -> RickyAndMortyContent(
             result.results,
             modifier = Modifier.padding(12.dp)
@@ -55,6 +59,52 @@ fun RickyAndMortyScreen(
     }
     LaunchedEffect(false) {
         viewModel.getItems()
+    }
+}
+
+@Composable
+fun RickyAndMortyLoadingContent(
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(2),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        items(20) {
+            RickyAndMortyItemLoading(modifier = Modifier.padding(12.dp))
+        }
+    }
+}
+
+@Composable
+fun RickyAndMortyItemLoading(
+    modifier: Modifier = Modifier
+) {
+    Card(modifier = modifier) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            ShimmerComponent(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .clip(CircleShape)
+                    .size(128.dp)
+            )
+            Spacer(
+                modifier = Modifier.padding(8.dp)
+            )
+            ShimmerComponent(
+                modifier = Modifier
+                    .fillMaxWidth(.8f)
+                    .height(25.dp)
+            )
+            Spacer(
+                modifier = Modifier.padding(8.dp)
+            )
+        }
     }
 }
 
@@ -71,7 +121,6 @@ fun RickyAndMortyContent(
             RickyAndMortyItemContent(
                 rickyAndMortyUiModel = it,
                 modifier = Modifier
-                    .width(100.dp)
                     .padding(12.dp)
             )
         }
