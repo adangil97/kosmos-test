@@ -1,6 +1,8 @@
 package com.example.rickyandmorty.data
 
-class RickyAndMortyRepository(
+import javax.inject.Inject
+
+class RickyAndMortyRepository @Inject constructor(
     private val rickyAndMortyRemoteDataSource: RickyAndMortyRemoteDataSource
 ) {
 

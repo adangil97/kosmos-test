@@ -1,27 +1,33 @@
 package com.example.rickyandmorty.framework
 
-import com.example.rickyandmorty.data.RickyAndMortyRepository
-import com.example.rickyandmorty.usecases.GetRickyAndMortyList
+import com.example.rickyandmorty.data.RickyAndMortyRemoteDataSource
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-fun retrofit(): Retrofit = Retrofit.Builder()
-    .baseUrl("https://rickandmortyapi.com/api/")
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
+@Module
+@InstallIn(ViewModelComponent::class)
+abstract class RickyAndMortyModule {
 
-fun rickyAndMortyService(
-    retrofit: Retrofit = retrofit()
-): RickyAndMortyService = retrofit.create(RickyAndMortyService::class.java)
+    @Binds
+    abstract fun rickyAndMortyRemoteDataSource(
+        rickyAndMortyApiDataSource: RickyAndMortyApiDataSource
+    ): RickyAndMortyRemoteDataSource
 
-fun rickyAndMortyRemoteDataSource(
-    rickyAndMortyService: RickyAndMortyService = rickyAndMortyService()
-) = RickyAndMortyApiDataSource(rickyAndMortyService)
+    companion object {
+        @Provides
+        fun retrofit(): Retrofit = Retrofit.Builder()
+            .baseUrl("https://rickandmortyapi.com/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-fun rickyAndMortyRepository(
-    rickyAndMortyApiDataSource: RickyAndMortyApiDataSource = rickyAndMortyRemoteDataSource()
-) = RickyAndMortyRepository(rickyAndMortyApiDataSource)
-
-fun getRickyAndMortyList(
-    rickyAndMortyRepository: RickyAndMortyRepository = rickyAndMortyRepository()
-) = GetRickyAndMortyList(rickyAndMortyRepository)
+        @Provides
+        fun rickyAndMortyService(
+            retrofit: Retrofit
+        ): RickyAndMortyService = retrofit.create(RickyAndMortyService::class.java)
+    }
+}

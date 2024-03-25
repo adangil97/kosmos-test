@@ -39,7 +39,7 @@ import com.example.rickyandmorty.SimpleErrorContent
 
 @Composable
 fun RickyAndMortyScreen(
-    viewModel: RickyAndMortyViewModel = viewModel(factory = RickyAndMortyViewModel.FACTORY)
+    viewModel: RickyAndMortyViewModel = viewModel()
 ) {
     val screenState by viewModel.state.collectAsState()
     when (val result = screenState) {

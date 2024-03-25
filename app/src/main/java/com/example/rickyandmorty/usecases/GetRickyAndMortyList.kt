@@ -1,8 +1,9 @@
 package com.example.rickyandmorty.usecases
 
 import com.example.rickyandmorty.data.RickyAndMortyRepository
+import javax.inject.Inject
 
-class GetRickyAndMortyList(
+class GetRickyAndMortyList @Inject constructor(
     private val rickyAndMortyRepository: RickyAndMortyRepository
 ) {
 
