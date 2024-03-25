@@ -54,11 +54,11 @@ fun RickyAndMortyScreen(
         )
 
         is RickyAndMortyState.Error -> SimpleErrorContent(msgError = result.errorMsg) {
-            viewModel.getItems()
+            viewModel.getCharacterList()
         }
     }
     LaunchedEffect(false) {
-        viewModel.getItems()
+        viewModel.getCharacterList()
     }
 }
 

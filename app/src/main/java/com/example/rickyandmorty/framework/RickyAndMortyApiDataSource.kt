@@ -8,8 +8,8 @@ class RickyAndMortyApiDataSource @Inject constructor(
     private val rickyAndMortyService: RickyAndMortyService
 ) : RickyAndMortyRemoteDataSource {
 
-    override suspend fun getItems(): List<RickyAndMortyItem> {
-        val call = rickyAndMortyService.getItems()
+    override suspend fun getRickyAndMortyCharacterList(): List<RickyAndMortyItem> {
+        val call = rickyAndMortyService.getRickyAndMortyCharacterList()
         return call.body()?.results.orEmpty()
     }
 }
