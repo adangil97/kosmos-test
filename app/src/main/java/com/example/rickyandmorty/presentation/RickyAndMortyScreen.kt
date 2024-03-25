@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.rickyandmorty.ExpandableColumn
+import com.example.rickyandmorty.RickyAndMortyText
 import com.example.rickyandmorty.ShimmerComponent
 import com.example.rickyandmorty.SimpleErrorContent
 
@@ -211,36 +212,18 @@ fun RickyAndMortyDetailContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        Text(
-            text = "Status: ${rickyAndMortyUiModel.status}",
-            maxLines = 1
-        )
+        RickyAndMortyText(strongText = "Status: ", text = rickyAndMortyUiModel.status)
         Spacer(modifier = Modifier.padding(8.dp))
-        Text(
-            text = "Species: ${rickyAndMortyUiModel.species}",
-            maxLines = 1
-        )
+        RickyAndMortyText(strongText = "Species: ", text = rickyAndMortyUiModel.species)
         rickyAndMortyUiModel.type.takeIf { it.isNullOrEmpty().not() }?.let {
             Spacer(modifier = Modifier.padding(8.dp))
-            Text(
-                text = "Type: ${rickyAndMortyUiModel.type}",
-                maxLines = 1
-            )
+            RickyAndMortyText(strongText = "Type: ", text = it)
         }
         Spacer(modifier = Modifier.padding(8.dp))
-        Text(
-            text = "Gender: ${rickyAndMortyUiModel.gender}",
-            maxLines = 1
-        )
+        RickyAndMortyText(strongText = "Gender: ", text = rickyAndMortyUiModel.gender)
         Spacer(modifier = Modifier.padding(8.dp))
-        Text(
-            text = "Origin: ${rickyAndMortyUiModel.origin}",
-            maxLines = 1
-        )
+        RickyAndMortyText(strongText = "Origin: ", text = rickyAndMortyUiModel.origin)
         Spacer(modifier = Modifier.padding(8.dp))
-        Text(
-            text = "Location: ${rickyAndMortyUiModel.location}",
-            maxLines = 1
-        )
+        RickyAndMortyText(strongText = "Location: ", text = rickyAndMortyUiModel.location)
     }
 }

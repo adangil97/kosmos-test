@@ -43,10 +43,16 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun SimpleErrorContent(
@@ -193,13 +199,13 @@ fun ExpandableTitle(
 
 private fun Modifier.shimmer(): Modifier = composed {
     var size by remember { mutableStateOf(IntSize.Zero) }
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "")
     val startOffsetX by transition.animateFloat(
         initialValue = -2 * size.width.toFloat(),
         targetValue = 2 * size.width.toFloat(),
         animationSpec = infiniteRepeatable(
             animation = tween(1000)
-        )
+        ), label = ""
     )
 
     background(
@@ -220,4 +226,28 @@ private fun Modifier.shimmer(): Modifier = composed {
 @Composable
 fun ShimmerComponent(modifier: Modifier = Modifier) {
     Box(modifier.shimmer())
+}
+
+@Composable
+fun RickyAndMortyText(
+    strongText: String,
+    text: String,
+    modifier: Modifier = Modifier,
+    maxLines: Int = 2,
+    fontSize: TextUnit = 10.sp,
+    overflow: TextOverflow = TextOverflow.Ellipsis
+) {
+    val description = buildAnnotatedString {
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+            append(strongText)
+        }
+        append(text)
+    }
+    Text(
+        text = description,
+        modifier = modifier,
+        maxLines = maxLines,
+        fontSize = fontSize,
+        overflow = overflow
+    )
 }
