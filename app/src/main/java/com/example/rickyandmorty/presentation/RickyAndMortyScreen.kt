@@ -11,8 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
@@ -38,16 +39,14 @@ import com.example.rickyandmorty.ShimmerComponent
 import com.example.rickyandmorty.SimpleErrorContent
 
 @Composable
-fun RickyAndMortyScreen(
-    viewModel: RickyAndMortyViewModel = viewModel()
-) {
+fun RickyAndMortyScreen(viewModel: RickyAndMortyViewModel = viewModel()) {
     val screenState by viewModel.state.collectAsState()
     when (val result = screenState) {
         RickyAndMortyState.Loading -> RickyAndMortyLoadingContent(
             modifier = Modifier.padding(12.dp)
         )
 
-        is RickyAndMortyState.Success -> RickyAndMortyContent(
+        is RickyAndMortyState.Success -> RickyAndMortyListContent(
             result.results,
             modifier = Modifier.padding(12.dp)
         )
@@ -62,12 +61,10 @@ fun RickyAndMortyScreen(
 }
 
 @Composable
-fun RickyAndMortyLoadingContent(
-    modifier: Modifier = Modifier
-) {
-    LazyColumn(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+fun RickyAndMortyLoadingContent(modifier: Modifier = Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier
     ) {
         items(20) {
             RickyAndMortyItemLoading(modifier = Modifier.padding(12.dp))
@@ -107,13 +104,13 @@ fun RickyAndMortyItemLoading(
 }
 
 @Composable
-fun RickyAndMortyContent(
+fun RickyAndMortyListContent(
     result: List<RickyAndMortyUiModel>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier
     ) {
         items(result, key = { it.name }) {
             RickyAndMortyItemContent(

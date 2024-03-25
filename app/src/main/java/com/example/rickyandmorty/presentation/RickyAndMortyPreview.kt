@@ -6,7 +6,7 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 @Preview(showSystemUi = true)
 fun RickyAndMortyPrev() {
-    RickyAndMortyContent(
+    RickyAndMortyListContent(
         result = listOf(
             RickyAndMortyUiModel(
                 "Fake 1",
