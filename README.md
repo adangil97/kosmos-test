@@ -6,7 +6,7 @@
 
 <H3>Para caso práctico se usaron paquetes en lugar de modulos</H3>
 
-![Android MVVM Clean Achitecture Flow]([https://antonioleiva.com/wp-content/uploads/2018/09/clean-architecture-interaction.png](https://devexpert.io/wp-content/uploads/2018/10/clean-architecture-own-layers.png))
+![Android MVVM Clean Achitecture Flow](https://devexpert.io/wp-content/uploads/2018/10/clean-architecture-own-layers.png)
 
 <ol>
   <li>
