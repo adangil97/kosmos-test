@@ -5,7 +5,7 @@
 ![Android MVVM Clean Achitecture](https://cursokotlin.com/wp-content/uploads/2021/05/Android-Clean-Architecture.png)
 
 <H3>Para caso práctico se usaron paquetes en lugar de modulos</H3>
-![Android MVVM Clean Achitecture Flow]([https://cursokotlin.com/wp-content/uploads/2021/05/Android-Clean-Architecture.png](https://antonioleiva.com/wp-content/uploads/2018/09/clean-architecture-interaction.png))
+![Android MVVM Clean Achitecture Flow](https://antonioleiva.com/wp-content/uploads/2018/09/clean-architecture-interaction.png)
 
 <ol>
   <li>
